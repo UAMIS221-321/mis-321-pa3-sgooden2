@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Night 🎬</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div class="app">
+
+    <header class="header">
+      <div class="header-title">
+        <span class="header-icon">🎬</span>
+        <div>
+          <h1>Movie Night</h1>
+          <p>Your AI Movie Companion — powered by Claude + RAG</p>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- Chat Panel -->
+      <section class="chat-panel">
+        <div class="chat-messages" id="chatMessages">
+          <div class="message assistant">
+            <div class="bubble">
+              Hey there! 🍿 I'm your Movie Night assistant. Ask me for recommendations,
+              info about any film, or tell me to save a movie to your favorites!
+              <br><br>
+              <em>Try: "Recommend a sci-fi movie" or "Tell me about Inception"</em>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-area">
+          <input
+            type="text"
+            id="messageInput"
+            placeholder="Ask about movies..."
+            autocomplete="off"
+          />
+          <button id="sendBtn" onclick="sendMessage()">Send</button>
+        </div>
+      </section>
+
+      <!-- Favorites Sidebar -->
+      <aside class="favorites-panel">
+        <h2>❤️ My Favorites</h2>
+        <div id="favoritesList" class="favorites-list">
+          <p class="empty-msg">No favorites yet.<br>Ask me to save a movie!</p>
+        </div>
+      </aside>
+
+    </main>
+  </div>
+
+  <script src="js/chat.js"></script>
+</body>
+</html>

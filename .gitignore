@@ -1,0 +1,8 @@
+bin/
+obj/
+backend/wwwroot/
+.vs/
+*.user
+.env
+backend/appsettings.Development.json
+backend/appsettings.json
