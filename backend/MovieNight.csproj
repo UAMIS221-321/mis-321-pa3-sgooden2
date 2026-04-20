@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>MovieNight</RootNamespace>
     <AssemblyName>MovieNight</AssemblyName>
-    <FrontendSource>$(MSBuildThisFileDirectory)..\frontend</FrontendSource>
+    <FrontendSource>$(MSBuildThisFileDirectory)../frontend</FrontendSource>
     <WwwRoot>$(MSBuildThisFileDirectory)wwwroot</WwwRoot>
   </PropertyGroup>
 
@@ -16,7 +16,7 @@
     </ItemGroup>
     <MakeDir Directories="$(WwwRoot)" />
     <Copy SourceFiles="@(_FrontendFiles)"
-          DestinationFiles="@(_FrontendFiles->'$(WwwRoot)\%(RecursiveDir)%(Filename)%(Extension)')"
+          DestinationFiles="@(_FrontendFiles->'$(WwwRoot)/%(RecursiveDir)%(Filename)%(Extension)')"
           SkipUnchangedFiles="true" />
   </Target>
 
