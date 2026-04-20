@@ -1,1 +1,1 @@
-web: cd $HOME && heroku_output/MovieNight
+web: cd $HOME/heroku_output && ./MovieNight
