@@ -21,6 +21,11 @@ body {
   color: var(--text);
   font-family: var(--font);
   height: 100vh;
+  overflow: hidden;
+}
+
+.app {
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
