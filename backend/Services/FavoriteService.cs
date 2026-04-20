@@ -55,4 +55,33 @@ public class FavoriteService : BaseService
 
         return $"Removed \"{title}\" from your favorites.";
     }
+
+    public async Task<string> RemoveByTitleAsync(string title)
+    {
+        using var conn = CreateConnection();
+        await conn.OpenAsync();
+
+        var found = await conn.ExecuteScalarAsync<string>(
+            "SELECT title FROM Favorites WHERE LOWER(title) LIKE LOWER(@Title) LIMIT 1",
+            new { Title = $"%{title}%" });
+
+        if (found == null)
+            return $"\"{title}\" wasn't in your favorites.";
+
+        await conn.ExecuteAsync(
+            "DELETE FROM Favorites WHERE LOWER(title) LIKE LOWER(@Title)",
+            new { Title = $"%{title}%" });
+
+        return $"Removed \"{found}\" from your favorites.";
+    }
+
+    public async Task<bool> RemoveByIdAsync(int favoriteId)
+    {
+        using var conn = CreateConnection();
+        await conn.OpenAsync();
+        var rows = await conn.ExecuteAsync(
+            "DELETE FROM Favorites WHERE favorite_id = @Id",
+            new { Id = favoriteId });
+        return rows > 0;
+    }
 }

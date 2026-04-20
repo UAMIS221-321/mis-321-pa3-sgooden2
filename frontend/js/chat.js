@@ -86,8 +86,11 @@ async function loadFavorites() {
 
     favoritesList.innerHTML = data.map(f => `
       <div class="favorite-card">
-        <div class="fav-title">${escapeHtml(f.title)}</div>
-        <div class="fav-meta">${escapeHtml(f.genre)} &bull; ${f.year}</div>
+        <div class="fav-header">
+          <div class="fav-title">${escapeHtml(f.title)}</div>
+          <button class="fav-remove" onclick="removeFavorite(${f.favoriteId})" title="Remove">✕</button>
+        </div>
+        <div class="fav-meta">${escapeHtml(f.genre ?? '')} &bull; ${f.year}</div>
       </div>
     `).join('');
 
@@ -109,6 +112,12 @@ function escapeHtml(str) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/\n/g, '<br>');
+}
+
+// ── Remove favorite ───────────────────────────────────────────────
+async function removeFavorite(favoriteId) {
+  await fetch(`${API_BASE}/api/favorites/${favoriteId}`, { method: 'DELETE' });
+  await loadFavorites();
 }
 
 // ── Theme toggle ─────────────────────────────────────────────────

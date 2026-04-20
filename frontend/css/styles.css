@@ -288,11 +288,31 @@ body {
   padding: 10px 12px;
 }
 
+.fav-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.fav-remove {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.fav-remove:hover { color: #e53935; }
+
 .favorite-card .fav-title {
   font-size: 0.88rem;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 4px;
 }
 
 .favorite-card .fav-meta {

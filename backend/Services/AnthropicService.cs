@@ -143,8 +143,8 @@ public class AnthropicService
                 input.GetProperty("movie_id").GetInt32(),
                 input.GetProperty("movie_title").GetString() ?? ""),
 
-            "remove_from_favorites" => await _favoriteService.RemoveAsync(
-                input.GetProperty("movie_id").GetInt32()),
+            "remove_from_favorites" => await _favoriteService.RemoveByTitleAsync(
+                input.GetProperty("movie_title").GetString() ?? ""),
 
             "get_favorites" => await GetFavoritesAsTextAsync(),
 
@@ -184,15 +184,15 @@ public class AnthropicService
         new
         {
             name = "remove_from_favorites",
-            description = "Remove a movie from the user's favorites list",
+            description = "Remove a movie from the user's favorites list by title",
             input_schema = new
             {
                 type = "object",
                 properties = new
                 {
-                    movie_id = new { type = "integer", description = "The database ID of the movie to remove" }
+                    movie_title = new { type = "string", description = "The title of the movie to remove" }
                 },
-                required = new[] { "movie_id" }
+                required = new[] { "movie_title" }
             }
         },
         new

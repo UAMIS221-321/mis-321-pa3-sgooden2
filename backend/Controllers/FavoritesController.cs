@@ -20,4 +20,11 @@ public class FavoritesController : ControllerBase
         var favorites = await _favorites.GetAllAsync();
         return Ok(favorites);
     }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Remove(int id)
+    {
+        var removed = await _favorites.RemoveByIdAsync(id);
+        return removed ? Ok() : NotFound();
+    }
 }
