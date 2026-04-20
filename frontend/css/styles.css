@@ -2,18 +2,19 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --bg:          #0f0f1a;
-  --surface:     #1a1a2e;
-  --surface2:    #16213e;
-  --accent:      #e94560;
-  --accent-dim:  #c0364e;
-  --text:        #e0e0e0;
-  --text-muted:  #888;
-  --user-bubble: #0f3460;
-  --bot-bubble:  #1a1a2e;
-  --border:      #2a2a4a;
+  --bg:          #0d0d0d;
+  --surface:     #1a0000;
+  --surface2:    #111111;
+  --accent:      #cc0000;
+  --accent-dim:  #990000;
+  --text:        #f5f0e0;
+  --text-muted:  #a09070;
+  --user-bubble: #1a1a6e;
+  --bot-bubble:  #1a0000;
+  --border:      #3a1a00;
   --radius:      12px;
   --font:        'Segoe UI', system-ui, sans-serif;
+  --gold:        #f5c518;
 }
 
 body {
@@ -50,7 +51,7 @@ body {
 .header-title h1 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--gold);
   letter-spacing: 0.5px;
 }
 
@@ -143,6 +144,32 @@ body {
   40%           { transform: translateY(-6px); }
 }
 
+/* ── Genre Chips ─────────────────────────────────────────────────── */
+.genre-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 10px 24px 0;
+  flex-shrink: 0;
+}
+
+.chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 20px;
+  padding: 5px 14px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.chip:hover       { background: var(--accent); border-color: var(--accent); color: #fff; }
+.chip.surprise    { border-color: var(--gold); color: var(--gold); }
+.chip.surprise:hover { background: var(--gold); color: #000; }
+.chip.clear       { border-color: #555; color: #555; }
+.chip.clear:hover { background: #555; color: #fff; }
+
 /* ── Input Area ──────────────────────────────────────────────────── */
 .chat-input-area {
   display: flex;
@@ -199,7 +226,7 @@ body {
   padding: 18px 20px 12px;
   font-size: 1rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--gold);
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
 }

@@ -111,6 +111,32 @@ function escapeHtml(str) {
     .replace(/\n/g, '<br>');
 }
 
+// ── Genre chip ────────────────────────────────────────────────────
+function sendGenre(genre) {
+  messageInput.value = `Recommend a ${genre} movie`;
+  sendMessage();
+}
+
+// ── Surprise me ───────────────────────────────────────────────────
+function surpriseMe() {
+  messageInput.value = 'Surprise me with a random movie recommendation';
+  sendMessage();
+}
+
+// ── Clear chat ────────────────────────────────────────────────────
+function clearChat() {
+  history = [];
+  chatMessages.innerHTML = `
+    <div class="message assistant">
+      <div class="bubble">
+        Hey there! 🍿 I'm your Movie Night assistant. Ask me for recommendations,
+        info about any film, or tell me to save a movie to your favorites!
+        <br><br>
+        <em>Try: "Recommend a sci-fi movie" or "Tell me about Inception"</em>
+      </div>
+    </div>`;
+}
+
 // ── Enter key support ─────────────────────────────────────────────
 messageInput.addEventListener('keydown', e => {
   if (e.key === 'Enter' && !e.shiftKey) {
