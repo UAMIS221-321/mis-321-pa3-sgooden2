@@ -50,8 +50,11 @@ static async Task SetupDatabaseAsync(IServiceProvider services)
         await using var conn = new MySqlConnection(connStr);
         await conn.OpenAsync();
 
+        await conn.ExecuteAsync("DROP TABLE IF EXISTS Favorites");
+        await conn.ExecuteAsync("DROP TABLE IF EXISTS Movies");
+
         await conn.ExecuteAsync(@"
-            CREATE TABLE IF NOT EXISTS Movies (
+            CREATE TABLE Movies (
                 movie_id     INT AUTO_INCREMENT PRIMARY KEY,
                 title        VARCHAR(255) NOT NULL,
                 year         INT,
@@ -63,13 +66,7 @@ static async Task SetupDatabaseAsync(IServiceProvider services)
             )");
 
         await conn.ExecuteAsync(@"
-            ALTER TABLE Movies
-                ADD COLUMN IF NOT EXISTS cast_members TEXT,
-                ADD COLUMN IF NOT EXISTS plot TEXT,
-                ADD COLUMN IF NOT EXISTS rating DECIMAL(3,1)");
-
-        await conn.ExecuteAsync(@"
-            CREATE TABLE IF NOT EXISTS Favorites (
+            CREATE TABLE Favorites (
                 favorite_id INT AUTO_INCREMENT PRIMARY KEY,
                 movie_id    INT NOT NULL,
                 title       VARCHAR(255) NOT NULL,
@@ -77,10 +74,7 @@ static async Task SetupDatabaseAsync(IServiceProvider services)
                 FOREIGN KEY (movie_id) REFERENCES Movies(movie_id)
             )");
 
-        // Seed movies only once
-        var count = await conn.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM Movies");
-        if (count == 0)
-            await SeedMoviesAsync(conn);
+        await SeedMoviesAsync(conn);
     }
     catch (Exception ex)
     {
