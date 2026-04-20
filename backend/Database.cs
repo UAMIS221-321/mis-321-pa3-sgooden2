@@ -1,7 +1,5 @@
 namespace MovieNight;
 
-using MySqlConnector;
-
 public class Database
 {
     public string Host { get; set; } = "";
@@ -18,18 +16,8 @@ public class Database
         Username = username;
         Port = port;
         Password = password;
-        var builder = new MySqlConnectionStringBuilder
-        {
-            Server = host,
-            Port = uint.TryParse(port, out var parsedPort) ? parsedPort : 3306,
-            Database = database,
-            UserID = username,
-            Password = password,
-            // JawsDB plans vary; Preferred works for SSL and non-SSL hosts.
-            SslMode = MySqlSslMode.Preferred,
-            AllowPublicKeyRetrieval = true
-        };
-        ConnectionString = builder.ConnectionString;
+        ConnectionString =
+            $"Server={host};Port={port};Database={database};User={username};Password={password};SslMode=Required;AllowPublicKeyRetrieval=True;";
     }
 
     /// <summary>
@@ -65,9 +53,11 @@ public class Database
             var pass = "";
             if (!string.IsNullOrEmpty(uri.UserInfo))
             {
-                var parts = uri.UserInfo.Split(':', 2);
-                user = Uri.UnescapeDataString(parts[0]);
-                pass = parts.Length > 1 ? Uri.UnescapeDataString(parts[1]) : "";
+                var colon = uri.UserInfo.IndexOf(':');
+                user = colon >= 0
+                    ? Uri.UnescapeDataString(uri.UserInfo[..colon])
+                    : Uri.UnescapeDataString(uri.UserInfo);
+                pass = colon >= 0 ? Uri.UnescapeDataString(uri.UserInfo[(colon + 1)..]) : "";
             }
             var db = uri.AbsolutePath?.TrimStart('/') ?? "";
             var port = uri.Port > 0 ? uri.Port.ToString() : "3306";

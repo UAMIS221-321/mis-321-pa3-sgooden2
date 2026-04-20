@@ -4,5 +4,5 @@ backend/wwwroot/
 .vs/
 *.user
 .env
-backend/appsettings.Development.json
+appsettings.Development.json
 backend/appsettings.json
