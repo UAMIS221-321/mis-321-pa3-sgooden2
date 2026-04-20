@@ -63,6 +63,12 @@ static async Task SetupDatabaseAsync(IServiceProvider services)
             )");
 
         await conn.ExecuteAsync(@"
+            ALTER TABLE Movies
+                ADD COLUMN IF NOT EXISTS cast_members TEXT,
+                ADD COLUMN IF NOT EXISTS plot TEXT,
+                ADD COLUMN IF NOT EXISTS rating DECIMAL(3,1)");
+
+        await conn.ExecuteAsync(@"
             CREATE TABLE IF NOT EXISTS Favorites (
                 favorite_id INT AUTO_INCREMENT PRIMARY KEY,
                 movie_id    INT NOT NULL,
