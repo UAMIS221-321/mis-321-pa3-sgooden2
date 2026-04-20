@@ -111,6 +111,12 @@ function escapeHtml(str) {
     .replace(/\n/g, '<br>');
 }
 
+// ── Theme toggle ─────────────────────────────────────────────────
+function toggleTheme() {
+  const isLight = document.body.classList.toggle('light');
+  document.getElementById('themeBtn').textContent = isLight ? '🌙 Dark Mode' : '☀️ Light Mode';
+}
+
 // ── Genre chip ────────────────────────────────────────────────────
 function sendGenre(genre) {
   messageInput.value = `Recommend a ${genre} movie`;
